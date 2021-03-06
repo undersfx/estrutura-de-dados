@@ -1,16 +1,6 @@
 import unittest
-
-
-class ListaVaziaErro(Exception):
-    pass
-
-
-class Noh():
-    pass
-
-
-class ListaDuplamenteLigada():
-    pass
+from aula_03.lista_duplamente_ligada.desafio \
+    import ListaDuplamenteLigada, Noh, ListaVaziaErro
 
 
 class NohTestes(unittest.TestCase):
@@ -119,7 +109,7 @@ class ListaTestes(unittest.TestCase):
         self.assertIsNone(primeiro.esquerdo)
         self.assertIsNone(ultimo.direito)
 
-    def test_adicionar_terceiro(self):
+    def test_adicionar_terceiro_a_esquerda(self):
         lista = ListaDuplamenteLigada()
         lista.adicionar_a_esquerda(0)
         lista.adicionar_a_esquerda(1)
