@@ -119,7 +119,7 @@ class ListaTestes(unittest.TestCase):
         self.assertIsNone(primeiro.esquerdo)
         self.assertIsNone(ultimo.direito)
 
-    def test_adicionar_terceiro(self):
+    def test_adicionar_terceiro_a_esquerda(self):
         lista = ListaDuplamenteLigada()
         lista.adicionar_a_esquerda(0)
         lista.adicionar_a_esquerda(1)
