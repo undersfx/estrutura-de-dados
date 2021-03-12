@@ -224,6 +224,28 @@ class ListaTestes(unittest.TestCase):
         for i, elemento_da_lista in zip(range(3), lista):
             self.assertEqual(i, elemento_da_lista)
 
+    def test_iterar_reversed_lista_vazia(self):
+        lista = ListaDuplamenteLigada()
+        for i in reversed(lista):
+            self.fail('Não deveria executar nada')
+
+    def test_iterar_lista_reversed_nao_vazia(self):
+        lista = ListaDuplamenteLigada()
+        numeros = list(range(3))
+        for n in numeros:
+            lista.adicionar(n)
+
+        for i, elemento_da_lista in zip(reversed(range(3)), reversed(lista)):
+            self.assertEqual(i, elemento_da_lista)
+
+    def test_len(self):
+        lista = ListaDuplamenteLigada()
+        self.assertEqual(0, len(lista))
+        lista.adicionar_a_esquerda(0)
+        lista.adicionar_a_esquerda(1)
+        lista.adicionar_a_esquerda(2)
+        self.assertEqual(3, len(lista))
+
 
 if __name__ == '__main__':
     unittest.main()

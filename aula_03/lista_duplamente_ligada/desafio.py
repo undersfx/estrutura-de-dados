@@ -98,3 +98,20 @@ class ListaDuplamenteLigada():
         while noh is not None:
             yield noh.valor
             noh = noh.direito
+
+    def __len__(self):
+        '''
+        Complexidade de Tempo:  f(n) = 1 -> O(1)
+        Complexidade de Espaço: f(n) = 1 -> O(1)
+        '''
+        return self.tam
+
+    def __reversed__(self):
+        '''
+        Complexidade de Tempo:  f(n) = 3n + 1 -> O(n)
+        Complexidade de Espaço: f(n) = 1 -> O(1)
+        '''
+        noh = self.ultimo
+        while noh is not None:
+            yield noh.valor
+            noh = noh.esquerdo
