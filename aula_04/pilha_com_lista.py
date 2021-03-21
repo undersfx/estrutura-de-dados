@@ -2,7 +2,28 @@ import unittest
 
 
 class Pilha:
-    pass
+    def __init__(self) -> None:
+        self._pilha = list()
+
+    def topo(self):
+        try:
+            return self._pilha[-1]
+        except IndexError as e:
+            raise PilhaVaziaExcecao('Pilha Vazia') from e
+
+    @property
+    def esta_vazia(self):
+        return not bool(self._pilha)
+
+    def empilhar(self, valor):
+        self._pilha.append(valor)
+
+    def desempilhar(self):
+        try:
+            return self._pilha.pop()
+        except IndexError as e:
+            raise PilhaVaziaExcecao('Pilha Vazia') from e
+
 
 class PilhaVaziaExcecao(Exception):
     pass
