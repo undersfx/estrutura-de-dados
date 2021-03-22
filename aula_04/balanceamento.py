@@ -8,9 +8,9 @@ file_path = path.abspath(__file__)
 projeto_path = path.join(file_path, '..', '..')
 projeto_path = path.abspath(projeto_path)
 sys.path.append(projeto_path)
-
-
 ## Fim
+
+from aula_04.pilha_com_lista import Pilha, PilhaVaziaExcecao
 
 def esta_balanceada(expressao):
     """
@@ -19,8 +19,34 @@ def esta_balanceada(expressao):
     Deverá ser usada como estrutura de dados apenas a pilha feita na aula anterior
     :param expressao: string com expressao a ser balanceada
     :return: boleano verdadeiro se expressao está balanceada e falso caso contrário
+
+    Complexidade em Tempo: O(n)
+    # Pelo menos uma iteração até o fim para validação da string.
+
+    Complexidade em Espaço: O(n)
+    # ([{([{([{([{([{([{([{([{([{([{
     """
-    pass
+    par = {')':'(', ']':'[', '}': '{'}
+    pilha = Pilha()
+
+    for c in expressao:
+        if c in '([{':
+            pilha.empilhar(c)
+
+        if c in ')]}':
+            try:
+                if pilha.topo() == par[c]:
+                    pilha.desempilhar()
+                    continue
+            except PilhaVaziaExcecao:
+                return False
+            else:
+                return False
+
+    if not pilha.esta_vazia:
+        return False
+
+    return True
 
 
 class BalancearTestes(unittest.TestCase):
@@ -70,3 +96,6 @@ class BalancearTestes(unittest.TestCase):
 
     def test_char_errado_fechando(self):
         self.assertFalse(esta_balanceada('[)'))
+
+    def test_char_ordem_errada(self):
+        self.assertFalse(esta_balanceada('[(])'))

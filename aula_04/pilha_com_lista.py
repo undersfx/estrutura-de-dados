@@ -3,9 +3,17 @@ import unittest
 
 class Pilha:
     def __init__(self) -> None:
+        '''
+        Complexidade em Tempo: O(1)
+        Complexidade em Espaço: O(1)
+        '''
         self._pilha = list()
 
     def topo(self):
+        '''
+        Complexidade em Tempo: O(1)
+        Complexidade em Espaço: O(1)
+        '''
         try:
             return self._pilha[-1]
         except IndexError as e:
@@ -13,12 +21,24 @@ class Pilha:
 
     @property
     def esta_vazia(self):
+        '''
+        Complexidade em Tempo: O(1)
+        Complexidade em Espaço: O(1)
+        '''
         return not bool(self._pilha)
 
     def empilhar(self, valor):
+        '''
+        Complexidade em Tempo: O(1)*
+        Complexidade em Espaço: O(1)
+        '''
         self._pilha.append(valor)
 
     def desempilhar(self):
+        '''
+        Complexidade em Tempo: O(1)*
+        Complexidade em Espaço: O(1)
+        '''
         try:
             return self._pilha.pop()
         except IndexError as e:
