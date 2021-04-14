@@ -1,10 +1,24 @@
 # Exercício de avaliação de expressão aritmética.
 # Só podem ser usadas as estruturas Pilha e Fila implementadas em aulas anteriores.
 # Deve ser análise de tempo e espaço para função avaliação
-import unittest
+
 from numbers import Number
 
 from aula_05.fila import Fila
+
+
+class FilaHelper(Fila):
+    def to_number(self):
+        num = ''.join(self._deque)
+        self._deque.clear()
+        if "." in num:
+            num = float(num)
+        else:
+            num = int(num)
+        return num
+
+
+Fila = FilaHelper
 
 
 class ErroLexico(Exception):
@@ -56,7 +70,29 @@ def analise_sintatica(fila:Fila) -> Fila:
     :param fila: fila proveniente de análise lexica
     :return: fila_sintatica com elementos tokens de numeros
     """
-    pass
+    if not fila:
+        raise ErroSintatico()
+
+    result = Fila()
+    temp = Fila()
+    caracteres_validos = ("+", "-", "*", "/", "(", ")", "{", "}", "[", "]")
+
+    for token in fila:
+        if token.isnumeric() or token == ".":
+            temp.enfileirar(token)
+            continue
+
+        if token in caracteres_validos:
+            if temp: result.enfileirar(temp.to_number())
+
+            result.enfileirar(token)
+            continue
+
+        raise ErroSintatico()
+    else:
+        if temp: result.enfileirar(temp.to_number())
+
+    return result
 
 
 def avaliar(expressao:str) -> Number:
