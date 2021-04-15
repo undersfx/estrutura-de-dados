@@ -2,6 +2,7 @@
 # Só podem ser usadas as estruturas Pilha e Fila implementadas em aulas anteriores.
 # Deve ser análise de tempo e espaço para função avaliação
 
+import operator
 from numbers import Number
 
 from aula_05.fila import Fila
@@ -52,25 +53,25 @@ def analise_lexica(expressao:str) -> Fila:
     Space Complexity = O(n)
     """
     fila_lexica = Fila()
-    temp = Fila()
+    token = Fila()
     caracteres_validos = (".", "+", "-", "*", "/", "(", ")", "{", "}", "[", "]")
 
-    for token in expressao:
-        if not token.isnumeric() and token not in caracteres_validos:
-            raise ErroLexico(f"{token} não é um caractere válido.")
+    for char in expressao:
+        if not char.isnumeric() and char not in caracteres_validos:
+            raise ErroLexico(f"{char} não é um caractere válido.")
 
-        if token.isnumeric():
-            temp.enfileirar(token)
+        if char.isnumeric():
+            token.enfileirar(char) # Fila._deque(['1', '0', '0', '0']) -> '1000'
             continue
-        elif temp:
-            fila_lexica.enfileirar(''.join(temp))
-            temp = Fila()
+        elif token:
+            fila_lexica.enfileirar(''.join(token))
+            token = Fila()
 
-        fila_lexica.enfileirar(token)
+        fila_lexica.enfileirar(char)
 
     else:
-        if temp:
-            fila_lexica.enfileirar(''.join(temp))
+        if token:
+            fila_lexica.enfileirar(''.join(token))
 
     return fila_lexica
 
@@ -124,14 +125,14 @@ def _avaliar_operacao(n: Number, operation: str, m: Number) -> Number:
     Space Complexity = O(1)
     """
     case = {
-        '+': lambda n, m: n + m,
-        '-': lambda n, m: n - m,
-        '*': lambda n, m: n * m,
-        '/': lambda n, m: n / m,
+        '+': operator.add,  # lambda n, m: n + m,
+        '-': operator.sub,  # lambda n, m: n - m,
+        '*': operator.mul,  # lambda n, m: n * m,
+        '/': operator.truediv,  # lambda n, m: n / m,
     }
     try:
         return case[operation](n, m)
-    except TypeError as e:  
+    except TypeError as e:
         raise ValueError('Operação não suportada') from e
 
 
@@ -170,7 +171,7 @@ def avaliar(expressao:str) -> Number:
     :param expressao: string com expressão aritmética
     :return: valor númerico com resultado
 
-    Time Complexity = O(n**2)
+    Time Complexity = O(2n)
     Space Complexity = O(n)
     """
     # Fazer análise léxica
