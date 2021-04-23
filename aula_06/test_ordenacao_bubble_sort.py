@@ -2,6 +2,7 @@ import unittest
 
 
 def ordenar(seq):
+<<<<<<< HEAD
     pass
     # [5, 1, 3, 2] original
     # [1, 3, 2, 5] passada 1
@@ -11,6 +12,15 @@ def ordenar(seq):
     # [4, 3, 2, 5] original
     # [3, 2, 4, 5] original
     # [2, 3, 4, 5] original  O (n ** 2)
+=======
+    for i in range(len(seq)):
+        for j in range(i + 1, len(seq)):
+            if seq[j] < seq[i]:
+                seq[j], seq[i] = seq[i], seq[j]
+         
+    return seq
+
+>>>>>>> add: execicio algoritimos de ordenaçao
 
 class OrdenacaoTestes(unittest.TestCase):
     def teste_lista_vazia(self):
