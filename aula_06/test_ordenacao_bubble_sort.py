@@ -14,10 +14,15 @@ def ordenar(seq):
     # [2, 3, 4, 5] original  O (n ** 2)
 =======
     for i in range(len(seq)):
+        sentinel = True
+
         for j in range(i + 1, len(seq)):
             if seq[j] < seq[i]:
                 seq[j], seq[i] = seq[i], seq[j]
-         
+                sentinel = False
+        
+        if sentinel: return seq
+
     return seq
 
 >>>>>>> add: execicio algoritimos de ordenaçao
@@ -34,6 +39,9 @@ class OrdenacaoTestes(unittest.TestCase):
 
     def teste_lista_desordenada(self):
         self.assertListEqual([0, 1, 2, 3, 4, 5, 6, 7, 8, 9], ordenar([9, 7, 1, 8, 5, 3, 6, 4, 2, 0]))
+
+    def teste_lista_ordenada(self):
+        self.assertListEqual([0, 1, 2, 3], ordenar([0, 1, 2, 3]))
 
 
 if __name__ == '__main__':
