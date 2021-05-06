@@ -14,16 +14,14 @@ def ordenar(seq):
     return lista_ordenada
 =======
     for i in range(len(seq) - 1):
-        if seq[i] > seq[i + 1]:
-            seq[i], seq[i + 1] = seq[i + 1], seq[i]
-            j = i
-            
-            while j - 1 >= 0:
-                if seq[j] < seq[j - 1]:
-                    seq[j], seq[j - 1] = seq[j - 1], seq[j]
-                    j -= 1
-                else:
-                    break
+        j = i + 1
+
+        while j - 1 >= 0:
+            if seq[j] < seq[j - 1]:
+                seq[j], seq[j - 1] = seq[j - 1], seq[j]
+                j -= 1
+            else:
+                break
 
     return seq
 
