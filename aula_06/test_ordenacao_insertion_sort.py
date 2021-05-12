@@ -2,17 +2,6 @@ import unittest
 
 
 def ordenar(seq):
-<<<<<<< HEAD
-    lista_ordenada = []
-    for indice, valor in enumerate(seq):
-        indice_ordenado=0
-        for indice_ordenado, valor_ordenado in enumerate(lista_ordenada):
-            if valor_ordenado > valor:
-                break
-        lista_ordenada.insert(indice_ordenado, valor)
-
-    return lista_ordenada
-=======
     for i in range(len(seq) - 1):
         j = i + 1
 
@@ -25,7 +14,6 @@ def ordenar(seq):
 
     return seq
 
->>>>>>> add: execicio algoritimos de ordenaçao
 
 
 class OrdenacaoTestes(unittest.TestCase):
@@ -43,8 +31,4 @@ class OrdenacaoTestes(unittest.TestCase):
 
 
 if __name__ == '__main__':
-<<<<<<< HEAD
     unittest.main()
-=======
-    unittest.main()
->>>>>>> add: execicio algoritimos de ordenaçao
