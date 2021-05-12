@@ -3,20 +3,6 @@ from collections import defaultdict
 from itertools import combinations
 
 
-def fabrica_de_zero():
-    return 0
-
-
-def calcular_troco(valor: int, tipos_de_notas: set):
-    notas_ordendas = sorted(tipos_de_notas, reverse=True)
-    frequencia = defaultdict(fabrica_de_zero)
-    for nota in notas_ordendas:
-        quantidade_de_notas, valor = divmod(valor, nota)
-        if quantidade_de_notas > 0:
-            frequencia[nota] = quantidade_de_notas
-    return frequencia
-
-
 def calcular_troco_nao_multiplo(valor: int, tipos_de_notas: set):
     """
     Divisão:
@@ -29,7 +15,7 @@ def calcular_troco_nao_multiplo(valor: int, tipos_de_notas: set):
     """
     def calcular_troco(valor: int, tipos_de_notas: set, solucao_inicial={}):
         notas_ordendas = sorted(tipos_de_notas, reverse=True)
-        frequencia = defaultdict(fabrica_de_zero)
+        frequencia = defaultdict(int)
         frequencia.update(solucao_inicial)
 
         for nota in notas_ordendas:
@@ -61,13 +47,6 @@ def calcular_troco_nao_multiplo(valor: int, tipos_de_notas: set):
             continue
 
     return ganhador
-
-
-class TestTroco(unittest.TestCase):
-    def test_troco(self):
-        self.assertDictEqual({}, calcular_troco(9, {10}))
-        self.assertDictEqual({10: 1}, calcular_troco(10, {10}))
-        self.assertDictEqual({10: 2, 5: 1, 1: 4}, calcular_troco(29, {1, 5, 10}))
 
 
 class TestTrocoNaoMultiplo(unittest.TestCase):
