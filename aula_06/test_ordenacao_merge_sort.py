@@ -2,39 +2,34 @@ import unittest
 
 
 def ordenar(seq):
-    def _ordenar(seq):
-        if len(seq) <= 1:
-            return seq
-        else:
-            m = len(seq) // 2
-            left_list = _ordenar(seq[:m])
-            right_list = _ordenar(seq[m:])
+    if len(seq) > 1:
+        m = len(seq) // 2
+        left_list = ordenar(seq[:m])
+        right_list = ordenar(seq[m:])
 
-            left_index = 0
-            right_index = 0
-            seq = []
+        left_index = 0
+        right_index = 0
+        seq = []
 
-            while True:
-                left_number = left_list[left_index]
-                right_number = right_list[right_index]
+        while True:
+            left_number = left_list[left_index]
+            right_number = right_list[right_index]
 
-                if left_number <= right_number:
-                    seq.append(left_number)
-                    left_index += 1
-                else:
-                    seq.append(right_number)
-                    right_index += 1
+            if left_number <= right_number:
+                seq.append(left_number)
+                left_index += 1
+            else:
+                seq.append(right_number)
+                right_index += 1
 
-                if left_index >= len(left_list):
-                    seq.extend(right_list[right_index:])
-                    break
-                elif right_index >= len(right_list):
-                    seq.extend(left_list[left_index:])
-                    break
+            if left_index >= len(left_list):
+                seq.extend(right_list[right_index:])
+                break
+            elif right_index >= len(right_list):
+                seq.extend(left_list[left_index:])
+                break
 
-        return seq
-
-    return _ordenar(seq)
+    return seq
 
 
 class OrdenacaoTestes(unittest.TestCase):
