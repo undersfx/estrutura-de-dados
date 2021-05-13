@@ -11,23 +11,16 @@ def ordenar(seq):
         right_index = 0
         seq = []
 
-        while True:
-            left_number = left_list[left_index]
-            right_number = right_list[right_index]
-
-            if left_number <= right_number:
-                seq.append(left_number)
+        while left_index < len(left_list) and right_index < len(right_list):
+            if left_list[left_index] <= right_list[right_index]:
+                seq.append(left_list[left_index])
                 left_index += 1
             else:
-                seq.append(right_number)
+                seq.append(right_list[right_index])
                 right_index += 1
 
-            if left_index >= len(left_list):
-                seq.extend(right_list[right_index:])
-                break
-            elif right_index >= len(right_list):
-                seq.extend(left_list[left_index:])
-                break
+        seq.extend(right_list[right_index:])
+        seq.extend(left_list[left_index:])
 
     return seq
 
