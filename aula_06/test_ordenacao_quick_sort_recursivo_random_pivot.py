@@ -3,18 +3,6 @@ from random import randint
 
 
 def quick_sort(seq):
-    if len(seq) <=1:
-        return seq
-    pivot = seq.pop()
-    menores = [n for n in seq if n < pivot]
-    lista_ordenada = quick_sort(menores)
-    lista_ordenada.append(pivot)
-    maiores = [n for n in seq if n >= pivot]
-    lista_ordenada.extend(quick_sort(maiores))
-    return lista_ordenada
-
-
-def quick_sort(seq):
     def _quick_sort(i, j):
         if j - i < 1:
             return
