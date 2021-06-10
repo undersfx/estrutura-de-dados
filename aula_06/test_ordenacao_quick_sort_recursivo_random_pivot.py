@@ -15,9 +15,9 @@ def quick_sort(seq):
 
 
 def quick_sort(seq):
-    def _quick_sort(seq, i, j):
+    def _quick_sort(i, j):
         if j - i < 1:
-            return seq
+            return
 
         fim = j
         p = randint(i, j)
@@ -33,13 +33,12 @@ def quick_sort(seq):
                     j -= 1
             i += 1
 
-        _quick_sort(seq, 0, j - 1)
-        _quick_sort(seq, j + 1, fim)
+        _quick_sort(0, j - 1)
+        _quick_sort(j + 1, fim)
 
-        return seq
+    _quick_sort(0, len(seq) - 1)
 
-    return _quick_sort(seq, 0, len(seq) - 1)
-
+    return seq
 
 
 class OrdenacaoTestes(unittest.TestCase):
